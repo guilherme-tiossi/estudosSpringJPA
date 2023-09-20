@@ -10,22 +10,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jpa.jpa.dominio.Pessoa;
 import jpa.jpa.repositorio.PessoaRepository;
+import jpa.jpa.servicos.PessoaService;
 
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaController {
     
     @Autowired
-    private PessoaRepository pessoaRepository;  
+    private PessoaService pessoaService;  
 
-    @PostMapping
+    @PostMapping("/salvar")
     public void salvarPessoa(@RequestBody Pessoa pessoa){
-        pessoaRepository.save(pessoa);
+        pessoaService.salvarPessoa(pessoa);
     }
 
     @GetMapping("/buscar")
     public List<Pessoa> buscarTodas() {
-        return pessoaRepository.findAll();
+        return pessoaService.buscarTodas();
     }
 
     @GetMapping("/ola")
